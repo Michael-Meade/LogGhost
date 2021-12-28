@@ -14,6 +14,15 @@
 
 It must be ran with root. 
 
+# Features
+
+|  Apache2 	|   bash_history	|   syslog	      |    
+|---	      |---	            |---	            | 
+| remove IP	| Remove commands |  remove cron  	|   	
+| replace method & path  	    |   remove entries|   	 
+| replace IP w/ random IP     |   	            |
+
+# Commands
 ## Remove IP
 ```ruby
 ruby lg.rb --ip 45.146.164.110 -rm
@@ -35,10 +44,3 @@ ruby lg.rb --ip 193.142.146.242 --meth POST
 ```ruby
 ruby lg.rb --ip 193.142.146.242 --meth POST --path dew.php
 ```
-
-# Features
-|  syslog | Apche2 logs  |   |   |   |
-|---      |---|---|---|---|
-| remove crons  |  remove IP |   |   |   |
-|         |  Replace IP, method, path |   |    |  |
-|        |   |   |   |   |
