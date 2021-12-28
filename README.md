@@ -2,7 +2,7 @@
 <div align="center">
 
 **[PROJECT PHILOSOPHY](https://github.com/chroline/well_app#-project-philosophy) • 
-[WIKI](https://github.com/chroline/well_app#-wiki) • 
+[FEATURES](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#features) • 
 [TECH STACK](https://github.com/chroline/well_app#-tech-stack) • 
 [CONTRIBUTING](https://github.com/chroline/well_app#%EF%B8%8F-contributing) • 
 [SPREAD THE WORD](https://github.com/chroline/well_app#-spread-the-word) • 
@@ -37,3 +37,8 @@ ruby lg.rb --ip 193.142.146.242 --meth POST --path dew.php
 ```
 
 # Features
+|  syslog | Apche2 logs  |   |   |   |
+|---      |---|---|---|---|
+| remove crons  |  remove IP |   |   |   |
+|         |  Replace IP, method, path |   |    |  |
+|        |   |   |   |   |
