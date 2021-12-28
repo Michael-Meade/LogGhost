@@ -2,6 +2,45 @@ require 'ipaddr'
 require 'optparse'
 require 'fileutils'
 #require 'etc'
+class BashHistory
+    def initialize
+        @user = Etc.getlogin
+        @hist = "/home/#{@user}/.bash_history"
+        @bu   = File.join("/home/#{@user}/.backup")
+    end
+    def start
+        if File.exists?(@hist)
+            read = File.read(@hist)
+            File.open(@bu, 'w') { |file| file.write(read) }
+        end
+        remove_s
+    end
+    def remove_s
+        r = "ruby " +  $PROGRAM_NAME
+        f = File.read(@bu)
+        s = f.split("\n")
+        i = 0
+        s.each do |x|
+            i+=1
+            if x.include?(r)
+                s.delete(x)
+            elsif x.include?("bash s.sh ")
+                s.delete(x)
+            end
+        end
+    l = s.reject { |element| element.empty? }
+    File.open(@bu, 'w') { |file| file.write(l.join("\n")+"\n") }
+    end
+    def ends
+        if File.exist?(@bu)
+            #remove_s
+            File.open(@hist, 'w') {|file| file.truncate(0) }
+            remove_s    
+            File.open(@hist, 'w') { |file| file.write(File.read(@bu)) }
+            File.delete(@bu)
+        end
+    end
+end
 class Apache2
     def initialize(rip: nil, path: "/.env", meth: "GET", remove: nil, live: true, apache_log: "/var/log/apache2/access.log", tmp_log: "/var/log/apache2/.access.log")
         # replace IP
@@ -42,8 +81,7 @@ class Apache2
             end
         else
             File.open("access-n.log", 'a') { |file| file.write(text) }
-        end    
-        
+        end
     end
     def remove
         log.each do |l|
@@ -97,7 +135,6 @@ class SysLog
         end
     clean
     end
-
 end
 #LogEditor.new(rip: "135.125.246.189", path: "/robots.txt").replace
 options = {}
