@@ -3,7 +3,7 @@
 
 **[ABOUT](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#about) • 
 [FEATURES](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#features) • 
-[COMMANDS](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#commands) • 
+[COMMANDS](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#commands)**
 
 
 </div>
