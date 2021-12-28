@@ -1,18 +1,25 @@
 
 <div align="center">
 
-**[PROJECT PHILOSOPHY](https://github.com/chroline/well_app#-project-philosophy) • 
+**[ABOUT](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#about) • 
 [FEATURES](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#features) • 
-[TECH STACK](https://github.com/chroline/well_app#-tech-stack) • 
-[CONTRIBUTING](https://github.com/chroline/well_app#%EF%B8%8F-contributing) • 
-[SPREAD THE WORD](https://github.com/chroline/well_app#-spread-the-word) • 
-[LICENSE](https://github.com/chroline/well_app#%EF%B8%8F-license)**
+[COMMANDS](https://github.com/Michael-Meade/LogGhost/blob/main/README.md#commands) • 
+
 
 </div>
 
 # LogGhost
 
 It must be ran with root. 
+
+# About
+This tool is able to remove traces from Apache2 logs. It can either remove the entry completely or replace the IP with a randomly generated one. 
+The tool is also able to change path and methods to anything the red teamer wants. The code will replace the '/var/log/apache2/access.log` file if it exists.
+
+The tool can also replace any line that the redteamer wants in the Syslog file. By default it will remove any cron entries. 
+
+The tool can also remove any traces in the .bash_history file. Before the red teamer enters any commands, the user must run `ruby message.rb --start`. This will copy the .bash_history file into a new file named .backup. After the command is finished running, the red teamer can enter any command they want. When they are finished red teaming, the user can run `ruby message.rb --end`, this will truncate the .bash_history file and copy over the contents of .backup to the .bash_history file. Everything that done after the --start command was ran will be gone from the log. Note: That there is a little bug that the message.rb script will still be in the log. This is because when you run the --end argument the command is not added to the .bash_history file until the process is finished.
+
 
 # Features
 
