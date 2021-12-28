@@ -1,6 +1,7 @@
 require 'ipaddr'
 require 'optparse'
 require 'fileutils'
+
 class LogEditor
     def initialize(rip: nil, path: "/.env", meth: "GET", remove: nil, live: true, apache_log: "/var/log/apache2/access.log", tmp_log: "/var/log/apache2/.access.log")
         # replace IP
@@ -95,7 +96,7 @@ if options[:replace]
 end
 
 if options[:meth]
-    lg.meth = "POST"
+    lg.meth = options[:meth]
     lg.replace
     lg.cleanup
 end

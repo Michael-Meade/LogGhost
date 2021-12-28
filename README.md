@@ -1,5 +1,6 @@
 # LogGhost
 
+It must be ran with root. 
 
 # Remove IP
 ```ruby
@@ -18,7 +19,7 @@ The command will change the IP, 192.142.146.242 to a random IP and change the or
 ruby lg.rb --ip 193.142.146.242 --meth POST
 ```
 
-# 
+# Change meth, path
 ```ruby
 ruby lg.rb --ip 193.142.146.242 --meth POST --path dew.php
 ```
